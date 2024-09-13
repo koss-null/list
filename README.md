@@ -37,7 +37,7 @@ Here is a list of available methods with their descriptions:
 
 ## Usage Example
 
-Here is a simple usage example:
+Here is a simple usage example: [try here](https://go.dev/play/p/xQwBpUEaT3r)
 
 ```go
 import (
@@ -56,7 +56,7 @@ func foo() {
 	// The list contains: 1, 2, 3
 
 	// Print the elements of the list
-	for val := range ll.Begin() {
+	for val := range ll.Begin {
 		fmt.Println(val)
 	}
 
