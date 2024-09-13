@@ -127,3 +127,126 @@ func TestPrev(t *testing.T) {
 		t.Errorf("Expected previous node to be %+v, got %+v", prevNode, node.Prev())
 	}
 }
+
+// TestPushBackMultiple checks if multiple nodes can be added to the back of the list
+func TestPushBackMultiple(t *testing.T) {
+	list := Linked[int]{}
+	for i := 1; i <= 5; i++ {
+		list.PushBack(i)
+	}
+	if list.Size() != 5 {
+		t.Errorf("Expected list size to be 5, got %d", list.Size())
+	}
+}
+
+// TestPushFrontMultiple checks if multiple nodes can be added to the front of the list
+func TestPushFrontMultiple(t *testing.T) {
+	list := Linked[int]{}
+	for i := 1; i <= 5; i++ {
+		list.PushFront(i)
+	}
+	if list.Size() != 5 {
+		t.Errorf("Expected list size to be 5, got %d", list.Size())
+	}
+}
+
+// TestPopBackEmpty checks if PopBack returns false when the list is empty
+func TestPopBackEmpty(t *testing.T) {
+	list := Linked[int]{}
+	val, ok := list.PopBack()
+	if ok {
+		t.Errorf("Expected false, got %v", ok)
+	}
+	if val != 0 {
+		t.Errorf("Expected zero value, got %d", val)
+	}
+}
+
+// TestPopFrontEmpty checks if PopFront returns false when the list is empty
+func TestPopFrontEmpty(t *testing.T) {
+	list := Linked[int]{}
+	val, ok := list.PopFront()
+	if ok {
+		t.Errorf("Expected false, got %v", ok)
+	}
+	if val != 0 {
+		t.Errorf("Expected zero value, got %d", val)
+	}
+}
+
+// TestBeginEarlyExit checks if the Begin method can exit early
+func TestBeginEarlyExit(t *testing.T) {
+	list := Linked[int]{}
+	list.PushBack(1)
+	list.PushBack(2)
+	list.PushBack(3)
+	count := 0
+	list.Begin(func(val int) bool {
+		count++
+		return count < 2 // Exit after visiting the first two nodes
+	})
+	if count != 2 {
+		t.Errorf("Expected to visit 2 nodes, visited %d", count)
+	}
+}
+
+// TestEndEarlyExit checks if the End method can exit early
+func TestEndEarlyExit(t *testing.T) {
+	list := Linked[int]{}
+	list.PushBack(1)
+	list.PushBack(2)
+	list.PushBack(3)
+	count := 0
+	list.End(func(val int) bool {
+		count++
+		return count < 2 // Exit after visiting the first two nodes
+	})
+	if count != 2 {
+		t.Errorf("Expected to visit 2 nodes, visited %d", count)
+	}
+}
+
+// TestMixedOperations checks if the list behaves correctly with mixed operations
+func TestMixedOperations(t *testing.T) {
+	list := Linked[int]{}
+	list.PushBack(1)
+	list.PushFront(2)
+	list.PushBack(3)
+
+	if val, ok := list.PopFront(); val != 2 || !ok {
+		t.Errorf("Expected (2, true), got (%d, %v)", val, ok)
+	}
+	if val, ok := list.PopBack(); val != 3 || !ok {
+		t.Errorf("Expected (3, true), got (%d, %v)", val, ok)
+	}
+	if val, ok := list.PopBack(); val != 1 || !ok {
+		t.Errorf("Expected (1, true), got (%d, %v)", val, ok)
+	}
+	if !list.Empty() {
+		t.Errorf("Expected list to be empty, but it's not")
+	}
+}
+
+// TestValNil checks if Val method returns the correct value for a nil node
+func TestValNil(t *testing.T) {
+	var node *Node[int]
+	if node != nil {
+		t.Errorf("Expected node to be nil, but it is not")
+	}
+}
+
+// TestNextNil checks if Next method returns nil for the last node
+func TestNextNil(t *testing.T) {
+	lastNode := &Node[int]{val: 1}
+	if lastNode.Next() != nil {
+		t.Errorf("Expected next node to be nil, got %+v", lastNode.Next())
+	}
+}
+
+// TestPrevNil checks if Prev method returns nil for the first node
+func TestPrevNil(t *testing.T) {
+	firstNode := &Node[int]{val: 1}
+	if firstNode.Prev() != nil {
+		t.Errorf("Expected previous node to be nil, got %+v", firstNode.Prev())
+	}
+}
