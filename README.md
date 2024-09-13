@@ -5,7 +5,8 @@
 [![Coverage](https://raw.githubusercontent.com/koss-null/list/master/coverage_badge.png?raw=true)](coverage)
 
 
-This repository contains a generic implementation of a doubly linked list in Go. It was created to address the lack of iterators and generic support in Go's default `container/list` package.
+This repository contains a **generic-based**, **thread-safe** implementation of a doubly linked list in Go with **iterators support**.  
+It was created to address the lack of iterators, async and generic support in Go's default `container/list` package.  
 
 ## Features
 
@@ -21,6 +22,10 @@ This linked list implementation provides the following features:
 
 Here is a list of available methods with their descriptions:
 
+- `NewSyncLinked[T]()`: Creates a new **synced** linked list (all operations are blocking).
+- `list.Linked[T]{}`: Creates a new **unsynced** linked list  
+  
+  
 - `PushBack(val T)`: Adds a new node with the given value at the end of the list.
 - `PushFront(val T)`: Adds a new node with the given value at the beginning of the list.
 - `PopBack() (T, bool)`: Removes the last node from the list and returns its value and a boolean indicating success.

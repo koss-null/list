@@ -1,5 +1,7 @@
 package list
 
+import "sync"
+
 // Node is a linked list object item
 type Node[T any] struct {
 	val    T
@@ -11,10 +13,19 @@ type Linked[T any] struct {
 	head *Node[T]
 	tail *Node[T]
 	len  int
+	mx   locker
+}
+
+// NewSyncLinked creates a new instance of a synchronized linked list
+func NewSyncLinked[T any]() Linked[T] {
+	return Linked[T]{mx: locker{&sync.Mutex{}}}
 }
 
 // PushBack adds a new node with the given value at the end of the list
 func (list *Linked[T]) PushBack(val T) {
+	list.mx.Lock()
+	defer list.mx.Unlock()
+
 	newNode := &Node[T]{val: val}
 	if list.tail != nil {
 		list.tail.rg = newNode
@@ -28,6 +39,9 @@ func (list *Linked[T]) PushBack(val T) {
 
 // PushFront adds a new node with the given value at the beginning of the list
 func (list *Linked[T]) PushFront(val T) {
+	list.mx.Lock()
+	defer list.mx.Unlock()
+
 	newNode := &Node[T]{val: val}
 
 	if list.head == nil {
@@ -46,6 +60,9 @@ func (list *Linked[T]) PushFront(val T) {
 
 // PopBack removes the last node from the list and returns its value and a boolean indicating success
 func (list *Linked[T]) PopBack() (T, bool) {
+	list.mx.Lock()
+	defer list.mx.Unlock()
+
 	if list.tail == nil {
 		var zero T
 		return zero, false
@@ -67,6 +84,9 @@ func (list *Linked[T]) PopBack() (T, bool) {
 
 // PopFront removes the first node and returns its value and boolean indicating success
 func (list *Linked[T]) PopFront() (T, bool) {
+	list.mx.Lock()
+	defer list.mx.Unlock()
+
 	if list.head == nil {
 		var zero T
 		return zero, false
@@ -87,22 +107,34 @@ func (list *Linked[T]) PopFront() (T, bool) {
 
 // Head returns the first node of the list
 func (list *Linked[T]) Head() *Node[T] {
-	return list.head
+	list.mx.Lock()
+	head := list.head
+	list.mx.Unlock()
+	return head
 }
 
 // Tail returns the last node of the list
 func (list *Linked[T]) Tail() *Node[T] {
-	return list.tail
+	list.mx.Lock()
+	tail := list.tail
+	list.mx.Unlock()
+	return tail
 }
 
 // Size returns the number of nodes in the list
 func (list *Linked[T]) Size() int {
-	return list.len
+	list.mx.Lock()
+	len := list.len
+	list.mx.Unlock()
+	return len
 }
 
 // Empty checks if the list is empty
 func (list *Linked[T]) Empty() bool {
-	return list.len == 0
+	list.mx.Lock()
+	len := list.len
+	list.mx.Unlock()
+	return len == 0
 }
 
 // Begin iterates over the list from the head to the tail
@@ -112,7 +144,9 @@ func (list *Linked[T]) Begin(yield func(T) bool) {
 		if !yield(cur.val) {
 			return
 		}
+		list.mx.Lock()
 		cur = cur.rg
+		list.mx.Unlock()
 	}
 }
 
@@ -123,7 +157,9 @@ func (list *Linked[T]) End(yield func(T) bool) {
 		if !yield(cur.val) {
 			return
 		}
+		list.mx.Lock()
 		cur = cur.lf
+		list.mx.Unlock()
 	}
 }
 
@@ -140,4 +176,21 @@ func (node *Node[T]) Next() *Node[T] {
 // Prev returns the previous node
 func (node *Node[T]) Prev() *Node[T] {
 	return node.lf
+}
+
+// locker is an internal object to support both sync and unsync lists
+type locker struct {
+	*sync.Mutex
+}
+
+func (l locker) Lock() {
+	if l.Mutex != nil {
+		l.Mutex.Lock()
+	}
+}
+
+func (l locker) Unlock() {
+	if l.Mutex != nil {
+		l.Mutex.Unlock()
+	}
 }
