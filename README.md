@@ -5,7 +5,10 @@
 [![Coverage](https://raw.githubusercontent.com/koss-null/list/master/coverage_badge.png?raw=true)](coverage)
 
 
-This repository contains a **generic-based**, **thread-safe** implementation of a doubly linked list in Go with **iterators support**.  
+This repository contains:
+- a **generic-based**, **thread-safe** implementation of a *doubly linked list* with **iterators support**.  
+- a **generic-based** implementation of **intrusive** *singly linked list*.  
+  
 It was created to address the lack of iterators, async and generic support in Go's default `container/list` package.  
 
 ## Features
