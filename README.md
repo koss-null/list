@@ -70,10 +70,10 @@ type S struct { // suppose this is your struct
 Here is a list of available methods with their descriptions:
   
   
--- `Next() *T`: returns a pointer to the next element in the linked list.
--- `SetNext(next *T)`: assigns the 'next' pointer to the provided element, effectively making 'next' the subsequent element in the list.
--- `InsertNext(elem *T)`: InsertNext() inserts the provided element 'elem' as the subsequent element in the list. The element that was previously next becomes the next element of 'elem'.
--- `RemoveNext()`: detaches the next element from the list. The element following the next element (if it exists) becomes the new next element.
+- `Next() *T`: returns a pointer to the next element in the linked list.
+- `SetNext(next *T)`: assigns the 'next' pointer to the provided element, effectively making 'next' the subsequent element in the list.
+- `InsertNext(elem *T)`: InsertNext() inserts the provided element 'elem' as the subsequent element in the list. The element that was previously next becomes the next element of 'elem'.
+- `RemoveNext()`: detaches the next element from the list. The element following the next element (if it exists) becomes the new next element.
   
 ## Usage Example
   
