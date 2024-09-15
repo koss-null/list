@@ -115,7 +115,7 @@ func foo() {
 
 ## Intrusive List Usage Example
 
-This library also supports **intrusive** singly linked lists if you want to imbed it in your own structure. Here is the example: 
+This library also supports **intrusive** singly linked lists if you want to imbed it in your own structure. Here is the example: [try here](https://go.dev/play/p/NMTOWaMQFaY)
 
 ```go
 import (
@@ -128,7 +128,7 @@ type S struct {
 	*list.List[S]
 }
 
-func NewS(a, b int) &S {
+func NewS(a, b int) *S {
     return &S{a: a, b: b, List: &list.List[S]{}}
 }
 
