@@ -22,16 +22,6 @@ This linked list implementation provides the following features:
 - **List Information**: The `Size` and `Empty` methods provide information about the list.
 - **Intrusive List Support**: The implementation allows you to embed the linked list structure directly within your own structs, enabling efficient memory usage and manipulation without the need for separate node types.
 
-## Table of Contents
-
-- [Linked List Implementation in Go](#linked-list-implementation-in-go)
-- [Features](#features)
-- [Doubly Linked List](#doubly-linked-list)
-- [Intrusive Singly Linked List](#intrusive-singly-linked-list)
-- [Usage Example](#usage-example)
-- [Intrusive List Usage Example](#intrusive-list-usage-example)
-- [Contributing](#contributing)
-
 ## Doubly Linked List
   
 Doubly linked list is created with: 
