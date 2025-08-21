@@ -11,6 +11,8 @@ This repository contains:
   
 It was created to address the lack of iterators, async and generic support in Go's default `container/list` package.  
 
+[pkg.go.dev page](https://pkg.go.dev/github.com/koss-null/list)  
+
 ## Features
 
 This linked list implementation provides the following features:
