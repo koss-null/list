@@ -1,9 +1,9 @@
 # Linked List Implementation in Go
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/koss-null/list)](https://goreportcard.com/report/github.com/koss-null/list)
+[![Go Reference](https://pkg.go.dev/badge/github.com/koss-null/list.svg)](https://pkg.go.dev/github.com/koss-null/list)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Coverage](https://raw.githubusercontent.com/koss-null/list/master/coverage_badge.png?raw=true)](coverage)
-
 
 This repository contains:
 - a **generic-based**, **thread-safe** implementation of a *doubly linked list* with **iterators support**.  
@@ -11,7 +11,6 @@ This repository contains:
   
 It was created to address the lack of iterators, async and generic support in Go's default `container/list` package.  
 
-[pkg.go.dev page](https://pkg.go.dev/github.com/koss-null/list)  
 
 ## Features
 
