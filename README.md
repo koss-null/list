@@ -3,7 +3,7 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/koss-null/list)](https://goreportcard.com/report/github.com/koss-null/list)
 [![Go Reference](https://pkg.go.dev/badge/github.com/koss-null/list.svg)](https://pkg.go.dev/github.com/koss-null/list)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Coverage](https://raw.githubusercontent.com/koss-null/list/master/coverage_badge.png?raw=true)](coverage)
+[![Coverage](https://raw.githubusercontent.com/koss-null/list/master/coverage.svg?raw=true)](coverage)
 
 This repository contains:
 - a **generic-based**, **thread-safe** implementation of a *doubly linked list* with **iterators support**.  
